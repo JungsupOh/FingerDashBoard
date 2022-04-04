@@ -31,11 +31,11 @@ dju = pd.read_sql_query('SELECT count(*) FROM auth_user where day(date_joined)=d
 djuVal = int(dju['count(*)'][0])
 
 # 오늘 등록된 인터뷰 수 (Daily Uploaded Items)
-dui = pd.read_sql_query('SELECT count(*) FROM interviews_interviews where (DATE(created_at) = CURDATE()) and (share_flag = \'flase\') and (delete_flag = \'flase\')', conn)
+dui = pd.read_sql_query('SELECT count(*) FROM interviews_interviews where (DATE(created_at) = CURDATE()) and (share_flag = \'false\') and (delete_flag = \'false\')', conn)
 duiVal = int(dui['count(*)'][0])
 
 # 오늘 등록된 인터뷰 시간 (Daily Uploaded Time)
-dut = pd.read_sql_query('SELECT sum(duration) FROM interviews_interviews where (DATE(created_at) = CURDATE()) and (share_flag = \'flase\') and (delete_flag = \'flase\')', conn)
+dut = pd.read_sql_query('SELECT sum(duration) FROM interviews_interviews where (DATE(created_at) = CURDATE()) and (share_flag = \'false\') and (delete_flag = \'false\')', conn)
 if dut['sum(duration)'][0] is None:
     dutVal = 0
 else:
