@@ -42,21 +42,21 @@ else:
     dutVal = int(dut['sum(duration)'][0])
 
 # 오늘 발급된 쿠폰 개수 (Daily Purchased Coupons)
-dpc = pd.read_sql_query('SELECT count(*) FROM interviews_purchase where DATE(expire_at) = (CURDATE()+ INTERVAL 5 YEAR)', conn)
+dpc = pd.read_sql_query('SELECT count(*) FROM interviews_purchase where DATE(expire_at) = (CURDATE()-1+ INTERVAL 5 YEAR)', conn)
 dpcVal = int(dpc['count(*)'][0])
 
 # 오늘 발급된 쿠폰 시간 총합 (Daily Purchased Time)
-dpt = pd.read_sql_query('SELECT * FROM interviews_purchase where DATE(expire_at) = (CURDATE()+ INTERVAL 5 YEAR)', conn)
+dpt = pd.read_sql_query('SELECT * FROM interviews_purchase where DATE(expire_at) = (CURDATE()-1+ INTERVAL 5 YEAR)', conn)
 dptVal = 0
 for row in dpt.values:
     dptVal = dptVal + int(row[2])*int(row[6])
 
 # 오늘 발급된 실고객 쿠폰 개수 (Daily Purchased Coupons)
-cdpc = pd.read_sql_query('SELECT count(*) FROM interviews_purchase where DATE(expire_at) = (CURDATE()+ INTERVAL 5 YEAR) AND owner_id > 3 AND owner_id <> 26 AND owner_id <> 25', conn)
+cdpc = pd.read_sql_query('SELECT count(*) FROM interviews_purchase where DATE(expire_at) = (CURDATE()-1+ INTERVAL 5 YEAR) AND owner_id > 3 AND owner_id <> 26 AND owner_id <> 25', conn)
 cdpcVal = int(cdpc['count(*)'][0])
 
 # 오늘 발급된 실고객 쿠폰 시간 총합 (Daily Purchased Time)
-cdpt = pd.read_sql_query('SELECT * FROM interviews_purchase where DATE(expire_at) = (CURDATE()+ INTERVAL 5 YEAR) AND owner_id > 3 AND owner_id <> 26 AND owner_id <> 25', conn)
+cdpt = pd.read_sql_query('SELECT * FROM interviews_purchase where DATE(expire_at) = (CURDATE()-1+ INTERVAL 5 YEAR) AND owner_id > 3 AND owner_id <> 26 AND owner_id <> 25', conn)
 cdptVal = 0
 for row in cdpt.values:
     cdptVal = cdptVal + int(row[2])*int(row[6])
